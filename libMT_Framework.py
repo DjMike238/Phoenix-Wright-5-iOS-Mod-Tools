@@ -65,7 +65,7 @@ def unpack_arc(fn,key):
         #print('%s,%08x,%08x,%08x,%08x'%(fname,ftype,zsize,sizetmp,offset))
     
     for (fname,ftype,zsize,size,offset,comFlag) in flist:
-        destdir = '%s_unpacked\\%s'%(fn,'\\'.join(fname.split('\\')[:-1]))
+        destdir = '%s_unpacked/%s'%(fn,'/'.join(fname.split('\\')[:-1]))
         if ftype in ClassDict:
             extname = ClassDict[ftype][1]
         else:
@@ -73,7 +73,7 @@ def unpack_arc(fn,key):
         print('decompressing %s at:%08x with %08x'%(fname,offset,zsize))
         if not os.path.exists(destdir):
             os.makedirs(destdir)
-        dest=open('%s\\%s%s'%(destdir,fname.split('\\')[-1],extname),'wb')
+        dest=open('%s/%s%s'%(destdir,fname.split('\\')[-1],extname),'wb')
         fp.seek(offset)
         bstr=fp.read(zsize)
         bstr=libBlowFish.decrypt_data(bstr,key)
@@ -87,7 +87,7 @@ def repack_arc(fn,key):
     print('repacking %s '%fn)
     base_addr = 0x8000
     offset = 0x8000
-    if not os.path.exists('%s_unpacked\\'%fn):
+    if not os.path.exists('%s_unpacked/'%fn):
         return None
     fp = open(fn,'rb+')
     magic = '\x41\x52\x43\x43'
@@ -113,12 +113,12 @@ def repack_arc(fn,key):
     boffset = 0x8000
     fp.truncate(boffset)
     for (tmp_ofs,fname,ftype,comFlag) in flist:
-        destdir = '%s_unpacked\\%s'%(fn,'\\'.join(fname.split('\\')[:-1]))
+        destdir = '%s_unpacked/%s'%(fn,'/'.join(fname.split('\\')[:-1]))
         if ftype in ClassDict:
             extname = ClassDict[ftype][1]
         else:
             extname = '.bin'
-        dest_name = '%s\\%s%s'%(destdir,fname.split('\\')[-1],extname)
+        dest_name = '%s/%s%s'%(destdir,fname.split('\\')[-1],extname)
         dest = open(dest_name,'rb')
         zdata = dest.read()
         zlibdata=zlib.compress(zdata)
