@@ -123,7 +123,7 @@ def repack_arc(fn,key):
         zdata = dest.read()
         zlibdata=zlib.compress(zdata)
         sdata = libBlowFish.encrypt_data(zlibdata,key)
-        print('eompressed size:%08x'%len(zlibdata))
+        print('compressed size:%08x'%len(zlibdata))
         dest.close()
         index_block = ''
         index_block += fname.encode('latin-1')
