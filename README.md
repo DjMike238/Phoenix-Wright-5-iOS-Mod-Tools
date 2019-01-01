@@ -1,9 +1,9 @@
-# Phoenix-Wright-5-iOS-Mod-Tools
-Phoenix Wright 5 iOS Mod Tools
+# Phoenix-Wright-5-Mobile-Mod-Tools
+Phoenix Wright 5 Mobile (iOS/Android) Mod Tools
 
- --- PACK.py pack arc files
+ --- PACK.py unpack arc files
  
- --- UNPACK.py unpack arc files
+ --- UNPACK.py pack arc files
  
  
  --- export_gmd.py export gmd strings
